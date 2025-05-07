@@ -1,0 +1,6 @@
+@CamKoob.MongoDB.API_HostAddress = http://localhost:5085
+
+GET {{CamKoob.MongoDB.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
