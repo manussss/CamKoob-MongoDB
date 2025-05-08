@@ -3,6 +3,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services
+    .AddSingleton<IMongoClient>(new MongoClient(builder.Configuration.GetConnectionString("MongoDB")));
+builder.Services
+    .AddScoped<IMongoDatabase>(provider => provider.GetRequiredService<IMongoClient>().GetDatabase("Orders"));
+
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
